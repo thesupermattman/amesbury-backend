@@ -3,6 +3,7 @@ package com.aamlid.amesbury.controller;
 import com.aamlid.amesbury.entity.UserEntity;
 import com.aamlid.amesbury.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +13,20 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @PostMapping("/signup")
+    public UserEntity registerUser(@RequestBody UserEntity user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userService.saveUser(user);
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "Logged in successfully!";
+    }
 
     @PostMapping
     public UserEntity createUser(@RequestBody UserEntity user) {
