@@ -19,7 +19,6 @@ public class UserController {
 
     @PostMapping("/signup")
     public UserEntity registerUser(@RequestBody UserEntity user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userService.saveUser(user);
     }
 
@@ -28,28 +27,28 @@ public class UserController {
         return "Logged in successfully!";
     }
 
-    @PostMapping
-    public UserEntity createUser(@RequestBody UserEntity user) {
-        return userService.saveUser(user);
-    }
-
-    @GetMapping("/email/{email}")
-    public UserEntity getUserByEmail(@PathVariable String email) {
-        return userService.findUserByEmail(email);
-    }
-
-    @GetMapping("/username/{username}")
-    public UserEntity getUserByUsername(@PathVariable String username) {
-        return userService.findUserByUsername(username);
-    }
-
-    @GetMapping
-    public List<UserEntity> getAllUsers() {
-        return userService.findAllUsers();
-    }
-
-    @DeleteMapping("/{email}")
-    public void deleteUserByEmail(@PathVariable String email) {
-        userService.deleteUserByEmail(email);
-    }
+//    @PostMapping
+//    public UserEntity createUser(@RequestBody UserEntity user) {
+//        return userService.saveUser(user);
+//    }
+//
+//    @GetMapping("/email/{email}")
+//    public UserEntity getUserByEmail(@PathVariable String email) {
+//        return userService.findUserByEmail(email);
+//    }
+//
+//    @GetMapping("/username/{username}")
+//    public UserEntity getUserByUsername(@PathVariable String username) {
+//        return userService.findUserByUsername(username);
+//    }
+//
+//    @GetMapping
+//    public List<UserEntity> getAllUsers() {
+//        return userService.findAllUsers();
+//    }
+//
+//    @DeleteMapping("/{email}")
+//    public void deleteUserByEmail(@PathVariable String email) {
+//        userService.deleteUserByEmail(email);
+//    }
 }
